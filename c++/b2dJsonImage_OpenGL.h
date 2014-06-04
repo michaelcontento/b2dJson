@@ -20,7 +20,14 @@
 #define B2DJSONIMAGE_OPENGL_H
 
 #ifdef __APPLE__
-	#include <GLUT/glut.h>
+    #ifdef CC_TARGET_OS_MAC
+        #import <GLUT/glut.h>
+    #else
+        #import <OpenGLES/EAGL.h>
+        #import <OpenGLES/EAGLDrawable.h>
+        #import <OpenGLES/ES1/gl.h>
+        #import <OpenGLES/ES1/glext.h>
+    #endif
 #else
 	#include "freeglut/freeglut.h"
 #endif
