@@ -415,19 +415,19 @@ Json::Value b2dJson::b2j(b2Joint* joint)
             floatToJson("springDampingRatio", wheelJoint->GetSpringDampingRatio(), jointValue);
         }
         break;
-    case e_motorJoint:
-        {
-            jointValue["type"] = "motor";
-
-            b2MotorJoint* motorJoint = (b2MotorJoint*)joint;
-            vecToJson("anchorA", bodyA->GetLocalPoint(motorJoint->GetAnchorA()), jointValue);
-            vecToJson("anchorB", bodyB->GetLocalPoint(motorJoint->GetAnchorB()), jointValue);
-            floatToJson("refAngle", motorJoint->GetAngularOffset(), jointValue);
-            floatToJson("maxForce", motorJoint->GetMaxForce(), jointValue);
-            floatToJson("maxTorque", motorJoint->GetMaxTorque(), jointValue);
-            //floatToJson("correctionFactor", motorJoint->GetCorrectionFactor(), jointValue);
-        }
-        break;
+//    case e_motorJoint:
+//        {
+//            jointValue["type"] = "motor";
+//
+//            b2MotorJoint* motorJoint = (b2MotorJoint*)joint;
+//            vecToJson("anchorA", bodyA->GetLocalPoint(motorJoint->GetAnchorA()), jointValue);
+//            vecToJson("anchorB", bodyB->GetLocalPoint(motorJoint->GetAnchorB()), jointValue);
+//            floatToJson("refAngle", motorJoint->GetAngularOffset(), jointValue);
+//            floatToJson("maxForce", motorJoint->GetMaxForce(), jointValue);
+//            floatToJson("maxTorque", motorJoint->GetMaxTorque(), jointValue);
+//            //floatToJson("correctionFactor", motorJoint->GetCorrectionFactor(), jointValue);
+//        }
+//        break;
     case e_weldJoint:
         {
             jointValue["type"] = "weld";
@@ -1220,7 +1220,7 @@ b2Joint* b2dJson::j2b2Joint(b2World* world, Json::Value &jointValue)
     b2MouseJointDef mouseDef;
     b2GearJointDef gearDef;
     b2WheelJointDef wheelDef;
-    b2MotorJointDef motorDef;
+//    b2MotorJointDef motorDef;
     b2WeldJointDef weldDef;
     b2FrictionJointDef frictionDef;
     b2RopeJointDef ropeDef;
@@ -1310,15 +1310,15 @@ b2Joint* b2dJson::j2b2Joint(b2World* world, Json::Value &jointValue)
         wheelDef.frequencyHz = jsonToFloat("springFrequency", jointValue);
         wheelDef.dampingRatio = jsonToFloat("springDampingRatio", jointValue);
     }
-    else if ( type == "motor" )
-    {
-        jointDef = &motorDef;
-        motorDef.linearOffset = jsonToVec("anchorA", jointValue);//editor uses anchorA as the linear offset
-        motorDef.angularOffset = jsonToFloat("refAngle", jointValue);
-        motorDef.maxForce = jsonToFloat("maxForce", jointValue);
-        motorDef.maxTorque = jsonToFloat("maxTorque", jointValue);
-        motorDef.correctionFactor = jsonToFloat("correctionFactor", jointValue);
-    }
+//    else if ( type == "motor" )
+//    {
+//        jointDef = &motorDef;
+//        motorDef.linearOffset = jsonToVec("anchorA", jointValue);//editor uses anchorA as the linear offset
+//        motorDef.angularOffset = jsonToFloat("refAngle", jointValue);
+//        motorDef.maxForce = jsonToFloat("maxForce", jointValue);
+//        motorDef.maxTorque = jsonToFloat("maxTorque", jointValue);
+//        motorDef.correctionFactor = jsonToFloat("correctionFactor", jointValue);
+//    }
     else if ( type == "weld" )
     {
         jointDef = &weldDef;
